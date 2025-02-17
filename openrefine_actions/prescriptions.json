@@ -1,0 +1,68 @@
+[
+    {
+        "op": "core/text-transform",
+        "engineConfig": {
+            "facets": [],
+            "mode": "row-based"
+        },
+        "columnName": "creation_date",
+        "expression": "jython:from datetime import datetime\n\nreturn datetime.strptime(\n    value, \"%Y-%m-%d %H:%M:%S\"\n).isoformat()",
+        "onError": "keep-original",
+        "repeat": false,
+        "repeatCount": 10,
+        "description": "Text transform on cells in column creation_date using expression jython:from datetime import datetime\n\nreturn datetime.strptime(\n    value, \"%Y-%m-%d %H:%M:%S\"\n).isoformat()"
+    },
+    {
+        "op": "core/column-addition",
+        "engineConfig": {
+            "facets": [],
+            "mode": "row-based"
+        },
+        "baseColumnName": "times_a_day",
+        "expression": "jython:mapping = {\n    \"1\": \"229797004\",\n    \"2\": \"229799001\",\n    \"3\": \"229798009\",\n    \"4\": \"307439001\",\n    \"5\": \"307440004\",\n    \"6\": \"307441000\",\n    \"7\": \"307442007\",\n    \"8\": \"307443002\",\n    \"9\": \"396115005\",\n    \"10\": \"396105004\"\n}\n\nreturn mapping.get(value, value)",
+        "onError": "set-to-blank",
+        "newColumnName": "frequency_snomed",
+        "columnInsertIndex": 6,
+        "description": "Create column frequency_snomed at index 6 based on column times_a_day using expression jython:mapping = {\n    \"1\": \"229797004\",\n    \"2\": \"229799001\",\n    \"3\": \"229798009\",\n    \"4\": \"307439001\",\n    \"5\": \"307440004\",\n    \"6\": \"307441000\",\n    \"7\": \"307442007\",\n    \"8\": \"307443002\",\n    \"9\": \"396115005\",\n    \"10\": \"396105004\"\n}\n\nreturn mapping.get(value, value)"
+    },
+    {
+        "op": "core/column-split",
+        "engineConfig": {
+            "facets": [],
+            "mode": "row-based"
+        },
+        "columnName": "dosage",
+        "guessCellType": true,
+        "removeOriginalColumn": true,
+        "mode": "separator",
+        "separator": " ",
+        "regex": false,
+        "maxColumns": 0,
+        "description": "Split column dosage by separator"
+    },
+    {
+        "op": "core/column-rename",
+        "oldColumnName": "dosage 1",
+        "newColumnName": "dosage_value",
+        "description": "Rename column dosage 1 to dosage_value"
+    },
+    {
+        "op": "core/column-rename",
+        "oldColumnName": "dosage 2",
+        "newColumnName": "dosage_unit",
+        "description": "Rename column dosage 2 to dosage_unit"
+    },
+    {
+        "op": "core/column-addition",
+        "engineConfig": {
+            "facets": [],
+            "mode": "row-based"
+        },
+        "baseColumnName": "dosage_unit",
+        "expression": "jython:mapping = {\n    \"teaspoon\": \"415703001\",\n    \"teaspoonful\": \"415703001\",\n    \"capsule\": \"428641000\",\n    \"ampule\": \"413516001\",\n    \"drop\": \"404218003\",\n    \"tablet\": \"428673006\",\n    \"patch\": \"419702001\",\n}\n\nreturn mapping.get(value, \"\")",
+        "onError": "set-to-blank",
+        "newColumnName": "dosage_unit_snomed",
+        "columnInsertIndex": 9,
+        "description": "Create column dosage_unit_snomed at index 9 based on column dosage_unit using expression jython:mapping = {\n    \"teaspoon\": \"415703001\",\n    \"teaspoonful\": \"415703001\",\n    \"capsule\": \"428641000\",\n    \"ampule\": \"413516001\",\n    \"drop\": \"404218003\",\n    \"tablet\": \"428673006\",\n    \"patch\": \"419702001\",\n}\n\nreturn mapping.get(value, \"\")"
+    }
+]

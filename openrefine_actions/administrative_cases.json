@@ -1,0 +1,15 @@
+[
+    {
+        "op": "core/text-transform",
+        "engineConfig": {
+            "facets": [],
+            "mode": "row-based"
+        },
+        "columnName": "created_at",
+        "expression": "jython:from datetime import datetime\n\nreturn datetime.strptime(value, \"%Y-%m-%d %H:%M:%S\").isoformat()",
+        "onError": "keep-original",
+        "repeat": false,
+        "repeatCount": 10,
+        "description": "Text transform on cells in column created_at using expression jython:from datetime import datetime\n\nreturn datetime.strptime(value, \"%Y-%m-%d %H:%M:%S\").isoformat()"
+    }
+]
