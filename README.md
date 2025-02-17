@@ -15,8 +15,10 @@ RDF.
 
 - Java 8 or higher (for both OpenRefine and RDFCraft)
 
-> [!NOTE] RDFCraft can be run without Java, but it will not be able to produce
-> RDF Files.
+> [!NOTE]
+>
+> RDFCraft can be run without Java, but it won't be able to generate RDF files.
+> You can still generate YARRRML and RML files and use them with other tools
 
 ## Software Installation
 
